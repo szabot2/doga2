@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>inftáv_doga</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <a class="active" href="index.html">IT DOGA2</a> | 
+
+    <br>
+    
+    <h1>Vegyes kapcsolás paramétereinek számítása DOGA2!</h1>
+
+    <form action="">
+        <label for="my_date">Add meg mikor születtél: </label>
+        <input type="date" name="dátum" id="my_date">
+        <input type="button" onclick="myfunction1()" value="ENTER">
+    </form>
+    <br>
+    <img id="kep" style="visibility: show; width: 20rem;" src="./IMG_20221104_074404_1.jpg" alt="kapcsolás">
+    <img style="visibility: show; width: 30em;" src="IMG_20221104_081929.jpg" alt="">
+    <br>
+    <p id="Re">1. Eredő ellenállás számítása!</p>
+    <p id="I">2. Főág áramerőssége!</p>
+    <p id="UR2">3. R2 ellenállás feszültsége!</p>
+    <p id="UR14">4. R1 és R4 ellenállás feszültsége!</p>
+    <p id="I1">5. R1 ellenálláson átfolyó áramerősség értéke!</p>
+    <p id="I4">6. R4 ellenálláson átfolyó áramerősség értéke!</p>
+    <p id="Pö">7. Az ellenállások teljesítmény értéke!</p>
+
+    <script>
+        function myfunction1() {
+            var year = parseInt(my_date.value);
+            var U = year / 100;
+            var month = parseInt(my_date.value.substr(5, 7));
+            var R4 = month
+            var date = parseInt(my_date.value.substr(8, 10));
+            var R1 = date
+            var R2 = date
+            var R3 = date
+
+            document.getElementById('kep').style.visibility = "visible"
+
+            var R14 = (R1 * R4) / (R1 + R4);
+            var Re = R14 + R2;
+
+            document.getElementById("Re").innerHTML = " U<sub>XY</sub> = " + U.toFixed(2) + " Volt <br> R<sub>1</sub> = R<sub>2</sub> = R<sub>3</sub> = " + R1 + " &#8486; <br> R<sub>4</sub> = " + R4 + " &#8486;"
+                + "<br><br> Az eredő ellenállás számítása: <br> Re = ( R1 x R4 ) + R2 <br> Re = " + Re.toFixed(2) + " &#8486;";
+
+            var I = U / Re;
+            document.getElementById('I').innerHTML = "Az áramkörben folyó összes áramerősség értéke: <br> I = " + (I.toFixed(2)) + " A"
+
+            var UR2 = R2*I
+            document.getElementById('UR2').innerHTML = "Az R2 ellenálláson eső feszültség: <br> UR2 = " + UR2.toFixed(2) + " V"
+
+            var UR14 = U-UR2
+            document.getElementById('UR14').innerHTML = "Az R1 és R4 ellenálláson eső feszültség: <br> UR14 = " + UR14.toFixed(2) + " V"
+
+            var I1 = UR14/R1
+            var I4 = UR14/R4
+            document.getElementById('I1').innerHTML = "Az R1 ellenálláson átfolyó áramerősség értéke: <br> I1 = " + (I1.toFixed(2)) + " A"
+            document.getElementById('I4').innerHTML = "Az R4 ellenálláson átfolyó áramerősség értéke: <br> I4 = " + (I4.toFixed(2)) + " A"
+
+            var P = U*I
+            var P1 = UR14*I1
+            var P2 = UR2*I
+            var P4 = UR14*I4
+            document.getElementById('Pö').innerHTML = "A teljesítmények számítása! <br> P = " + P.toFixed(2) + " W <br> P1 = " + P1.toFixed(2) + " W <br> P2 = " + P2.toFixed(2) + " W <br> P4 = " + P4.toFixed(2) + " W "
+
+        }
+    </script>
+
+</body>
+
+</html>
